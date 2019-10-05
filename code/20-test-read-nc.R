@@ -9,6 +9,6 @@ ncvar_get(age, 'lon')
 age.ras <- raster('data/GFAD/GFAD_V1-0.nc', varname = 'age', band = 2)
 age.ras
 
-pdf('figures/test-map.pdf')
+pdf('figs/test-map.pdf')
 plot(age.ras)
 dev.off()
