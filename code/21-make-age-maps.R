@@ -101,7 +101,7 @@ ocean_poly <- readOGR(ocean_shapefile, layer = layer)
 library(RColorBrewer)
 colfunc <- colorRampPalette(c("#F0E687", "#085025"))
 # plot (without projection)
-pdf("figures/age-map-newcolor.pdf")
+pdf("figs/age-map-newcolor.pdf")
 plot(age_veg,
   axes = FALSE, box = FALSE, col = colfunc(15), zlim = c(0, 150), breaks = seq(0, 150, 10),
   axis.args = list(at = seq(0, 150, 30), labels = seq(0, 150, 30))
@@ -122,7 +122,7 @@ grat30_lines_proj <- spTransform(grat30_lines, CRS("+proj=robin"))
 ocean_poly_proj <- spTransform(ocean_poly, CRS("+proj=robin"))
 
 # plot (with projection)
-pdf("figures/age-map-robinson-newcolor-newlegend.pdf")
+pdf("figs/age-map-robinson-newcolor-newlegend.pdf")
 plot(age_veg_proj,
   axes = FALSE, box = FALSE, col = colfunc(15), zlim = c(0, 150), breaks = seq(0, 150, 10),
   axis.args = list(at = seq(0, 150, 30), labels = seq(0, 150, 30), font = 2),
@@ -134,13 +134,13 @@ plot(coast_lines_proj, col = "white", add = TRUE, lwd = 0.0001)
 plot(bb_poly_proj, bor = "black", add = TRUE)
 dev.off()
 
-pdf("figures/histogram-newfont.pdf", height = 4, width = 7)
+pdf("figs/histogram-newfont.pdf", height = 4, width = 7)
 hist(na.omit(values(age_veg)), nclass = 15, fre = FALSE, main = "", ylab = "Percentage of pixels", xlab = "Forest Age (Year)", col = colfunc(15), border = "white", xaxt = "n", yaxt = "n", font.lab = 2)
 axis(side = 1, at = seq(0, 150, 30), labels = seq(0, 150, 30), font = 2)
 axis(side = 2, at = seq(0, 0.015, 0.003), labels = seq(0, 0.15, 0.03), font = 2)
 dev.off()
 
-pdf("figures/age-map-robinson-overlay-140+.pdf")
+pdf("figs/age-map-robinson-overlay-140+.pdf")
 par(mar = c(2, 2, 2, 2))
 par(fig = c(0, 10, 0, 10) / 10)
 

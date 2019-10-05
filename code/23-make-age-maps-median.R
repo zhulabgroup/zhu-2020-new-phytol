@@ -90,7 +90,7 @@ mtext("Forest age (yr)", side = 1, line = 0.2, font = 2, cex = 0.4)
 mtext("Percentage of pixels", side = 4, line = 0.2, font = 2, cex = 0.4)
 
 # overlay
-pdf("figures/age-map-median.pdf")
+pdf("figs/age-map-median.pdf")
 par(mar = c(2, 2, 2, 2))
 par(fig = c(0, 10, 0, 10) / 10)
 
