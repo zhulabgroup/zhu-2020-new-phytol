@@ -12,7 +12,7 @@ frac_sum <- frac_NEEV_brick + frac_NEDC_brick + frac_BRDC_brick + frac_BREV_bric
 plot(frac_sum)
 
 # read median age
-frac_sum_df <- read.csv("data/median-age.csv")[, -1]
+frac_sum_df <- read.csv("data/GFAD/median-age.csv")[, -1]
 
 # make raster
 median_ras <- rasterFromXYZ(frac_sum_df[, c(1, 2, 18)], crs = proj4string(frac_sum))

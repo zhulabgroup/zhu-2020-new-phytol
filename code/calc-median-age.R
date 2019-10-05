@@ -35,4 +35,4 @@ frac_sum_df[107467, ]
 frac_sum_df[150000, ]
 
 # output results
-write.csv(frac_sum_df, "data/median-age.csv")
+write.csv(frac_sum_df, "data/GFAD/median-age.csv")
