@@ -4,7 +4,7 @@ _New Phytologist_ mini-review paper
 ## Folders in this repo
 
 - `code/`: source code in R
-- `data-raw/`: raw data files downloaded by running [`code/00-download-data.R`](00-download-data.R)
+- `data-raw/`: raw data files downloaded by running [`code/00-download-data.R`](00-download-data.R), then unzip to `data/`, which is git-ignored
 - `docs/`: ideas for figure design
 - `figures/`: output figures
 
