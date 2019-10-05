@@ -16,6 +16,12 @@ Panel a shows additive, and panel b shows hierarchical.
 
 ![](blackboard-20191004.jpeg)
 
+## Fit Monod model to ForC data
+
+Fit a Monod model to all ForC simplified data, mu = 929.2607, k = 1008.9830.
+
+![](forc-monod.png)
+
 ## References
 
 Anderson-Teixeira, K J, A D Miller, J E Mohan, T W Hudiburg, B D Duval,
