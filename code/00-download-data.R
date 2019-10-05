@@ -28,3 +28,14 @@ download.file(
   "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_ocean.zip",
   "data-raw/ne_10m_ocean.zip"
 )
+
+# ForC data
+temp <- paste0(tempdir(), '/ForC_simplified.csv')
+download.file(
+  "https://raw.githubusercontent.com/forc-db/ForC/master/ForC_simplified/ForC_simplified.csv",
+  temp
+)
+zip(zipfile = 'data-raw/ForC_simplified.zip', 
+    files = temp,
+    flags = '-j9X') # j = junkpaths in unzip
+unlink(temp)

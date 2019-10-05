@@ -25,3 +25,8 @@ unzip("data-raw/ne_10m_wgs84_bounding_box.zip",
 unzip("data-raw/ne_10m_ocean.zip",
       exdir = "data/GIS/ne_10m_ocean"
 )
+
+# ForC data
+dir.create("data/ForC", F, T)
+unzip("data-raw/ForC_simplified.zip",
+      exdir = "data/ForC/", junkpaths = T) # junkpaths = j in zip
