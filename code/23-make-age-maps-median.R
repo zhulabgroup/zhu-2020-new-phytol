@@ -1,18 +1,8 @@
 # library(ncdf4)
 library(raster)
 
-# get fractions of 4 PFT
-frac_NEEV_brick <- brick("data/GFAD/GFAD_V1-1/GFAD_V1-1.nc", level = 1)
-frac_NEDC_brick <- brick("data/GFAD/GFAD_V1-1/GFAD_V1-1.nc", level = 2)
-frac_BRDC_brick <- brick("data/GFAD/GFAD_V1-1/GFAD_V1-1.nc", level = 3)
-frac_BREV_brick <- brick("data/GFAD/GFAD_V1-1/GFAD_V1-1.nc", level = 4)
-
-# add fractions of all PFTs
-frac_sum <- frac_NEEV_brick + frac_NEDC_brick + frac_BRDC_brick + frac_BREV_brick
-plot(frac_sum)
-
 # read median age
-frac_sum_df <- read.csv("data/GFAD/median-age.csv")[, -1]
+frac_sum_df <- read.csv("data/GFAD/median-age.csv")[, -1] # this file generated using 22-calc-median-age.R
 
 # make raster
 median_ras <- rasterFromXYZ(frac_sum_df[, c(1, 2, 18)], crs = proj4string(frac_sum))

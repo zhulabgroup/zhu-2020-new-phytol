@@ -10,7 +10,7 @@ forc_df <- read_csv("data/ForC/ForC_simplified.csv") %>%
     stand.age < 999,
     stand.age > 0
   ) %>%
-  select(id = measurement.ID, agb = mean, stand.age)
+  dplyr::select(id = measurement.ID, agb = mean, stand.age)
 
 # scatter plot
 forc_gg <- ggplot(forc_df, aes(stand.age, agb)) +
