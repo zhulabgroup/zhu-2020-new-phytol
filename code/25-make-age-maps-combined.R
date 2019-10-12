@@ -146,7 +146,7 @@ plot(age_veg_proj,
      legend.args = list(text = "Forest age (yr)", side = 3, font = 2, line = 0.5, cex = 0.8)
 )
 
-par(fig = c(5, 9.5, 5.5, 7.5) / 10)
+par(fig = c(5, 9.5, 5.5, 7) / 10)
 par(new = T)
 hist(na.omit(values(age_veg_proj)), nclass = 15, fre = FALSE, main = "", ylab = "", xlab = "", ylim = c(0, 0.015), col = colfunc.gfad(15), border = "white", axes = FALSE)
 axis(side = 1, at = c(0, 50, 100, 140, 150), label = rep("", 5), tck = -0.02, line = 0)
@@ -179,7 +179,7 @@ plot(forc_ras_proj,
      legend.args = list(text = "Forest age (yr)", side = 3, font = 2, line = 0.5, cex = 0.8)
 )
 
-par(fig = c(5, 9.5, 0.5, 2.5) / 10)
+par(fig = c(5, 9.5, 0.5, 2) / 10)
 par(new = T)
 hist(forc_df$stand.age.fewer, nclass = 15, fre = FALSE, main = "", ylab = "", xlab = "", ylim = c(0, 0.015), col = colfunc.forc(15), border = "white", axes = FALSE)
 axis(side = 1, at = c(0, 50, 100, 140, 150), label = rep("", 5), tck = -0.02, line = 0)
