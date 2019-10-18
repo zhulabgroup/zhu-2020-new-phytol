@@ -3,6 +3,14 @@
 # library(ncdf4)
 library(raster)
 
+tag <- "MEAN" # or "MEDIAN"
+
+if (tag == "MEAN") {
+  
+} else if (tag == "MEDIAN") {
+  
+}
+
 # get fractions of 4 PFT
 frac_NEEV_brick <- brick("data/GFAD/GFAD_V1-1/GFAD_V1-1.nc", level = 1)
 frac_NEDC_brick <- brick("data/GFAD/GFAD_V1-1/GFAD_V1-1.nc", level = 2)
