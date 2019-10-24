@@ -15,41 +15,42 @@
 # regrowth components. Furthermore, assume that the 
 # enhanced growth component increases linearly over 
 # stand age. 
+dropoff_a_x <- c(-100, 0, 0)
+dropoff_a_y <- c(500, 500, 50)
+
 monod_df_additive <- tibble(
-  stand.age = stand.age_vec,
-  total = predict(monod_mod,
-                  newdata = data.frame(stand.age = stand.age_vec)),
-  regrowth_component = stand.age_vec * 0.07,
-  enhanced_component = total - regrowth_component
+  stand.age = c(dropoff_a_x, stand.age_vec),
+  reduced_regrowth = c(dropoff_a_y, SSmicmen(stand.age_vec, 900, 1000)),
+  regrowth = c(dropoff_a_y, SSmicmen(stand.age_vec, 900, 1000)+50),
+  enhanced_regrowth = c(dropoff_a_y, SSmicmen(stand.age_vec, 900, 1000)+100)
 )
+
+gather(monod_df_additive, key="curve", value="agb", 
+       reduced_regrowth:enhanced_regrowth) %>%
+  mutate(size = if_else(curve=="regrowth", 2, 1)) ->
+  monod_df_additive_long
 
 fig_1a <- 
-  ggplot(monod_df_additive, aes(x=stand.age)) +
-  geom_line(aes(y=enhanced_component), lty=2) +
-  geom_line(aes(y=regrowth_component), lty=2) +
-  geom_line(aes(y=total), col="red", lwd=2) +
-  xlab("Stand age") +
-  ylab("Aboveground biomass") +
+  ggplot(monod_df_additive_long, aes(x=stand.age, col=curve, y=agb, size=size)) +
+  geom_line() +
+  scale_colour_manual(name="",
+                      labels=c("Enhanced regrowth", "Reduced regrowth", "Regrowth"),
+                      values=c("green","red", "black")) +
+  scale_size(range=c(1, 3)) +
+  xlab("Stand age (yr)") +
+  ylab(expression(Aboveground~biomass~(Mg~C~ha^-1))) +
+  guides(size=FALSE) +
   theme_classic() +
   theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=16))
+        axis.title=element_text(size=16)) +
+  theme(legend.justification = c(1, 0), legend.position = c(1, 0),
+        legend.box.margin=margin(c(5,5,5,5)), 
+        legend.text=element_text(size=12)) +
+  scale_y_continuous(breaks=seq(0,500,by=100))
 
-fig_1a_labels <- tibble(
-  x = rep(max(monod_df_additive$stand.age), 3),
-  y = c(max(monod_df_additive$total),
-        max(monod_df_additive$regrowth_component),
-        max(monod_df_additive$enhanced_component)-20),
-  labels = c("Total", "Regrowth", "Enhanced\ngrowth"),
-  col = c("red", "black", "black")
-)
-fig_1a +
-  geom_text(data=fig_1a_labels, aes(x=x, y=y, label=labels, col=col),
-            hjust=0, nudge_x=10, size=(5/14)*12) +
-  scale_colour_manual(values=c("black","red")) +
-  guides(col=FALSE) +
-  expand_limits(x=fig_1a_labels$x + 150, y=fig_1a_labels$y)
+fig_1a
 
-ggsave('figs/fig1_a.png', width = 5, height = 3.2)
+ggsave('figs/fig1_a.png', width = 5, height = 4)
 
 
 # Figure 1b
@@ -57,45 +58,43 @@ ggsave('figs/fig1_a.png', width = 5, height = 3.2)
 # Monod curve for ForC simplified data is one of
 # several Monod curves that could be fit. Monod
 # parameters mu and k are adjusted to fit other curves.
+dropoff_b_x <- c(-100, 0, 0)
+dropoff_b_y <- c(450, 450, 0)
+
 monod_df_hierarchical <- tibble(
-  stand.age = stand.age_vec,
-  curve1 = SSmicmen(stand.age, 600, 300), # lower mu, lower k
-  curve2 = SSmicmen(stand.age, 1100, 1010), # higher mu
-  curve0 = predict(monod_mod, # 930, 1010 # original
-                     newdata = data.frame(stand.age = stand.age_vec)),
-  curve3 = SSmicmen(stand.age, 930, 1400), # higher k
+  stand.age = c(dropoff_b_x, stand.age_vec),
+  curve0 = c(dropoff_b_y, SSmicmen(stand.age_vec, 900, 1000))+50,
+  curve1 = c(dropoff_b_y, SSmicmen(stand.age_vec, 600, 300))+50, # lower mu, lower k
+  curve2 = c(dropoff_b_y, SSmicmen(stand.age_vec, 1100, 1010))+50, # higher mu
+  curve3 = c(dropoff_b_y, SSmicmen(stand.age_vec, 930, 1400))+50 # higher k
 )
 
+gather(monod_df_hierarchical, key="curve", value="agb", 
+       curve0:curve3) %>%
+  mutate(size = if_else(curve=="curve0", 2, 1),
+         curve = factor(curve, levels=c("curve3","curve2","curve1","curve0"))) ->
+  monod_df_hierarchical_long
+
 fig_1b <- 
-  ggplot(monod_df_hierarchical, aes(x=stand.age)) +
-  geom_line(aes(y=curve1), col="green") +
-  geom_line(aes(y=curve0), col="red", lwd=2) +
-  geom_line(aes(y=curve2), col="blue") +
-  geom_line(aes(y=curve3), col="black") + 
-  # geom_line(aes(y=curve4), col="magenta") +
-  xlab("Stand age") +
-  ylab("Aboveground biomass") +
+  ggplot(monod_df_hierarchical_long, aes(x=stand.age, col=curve, y=agb, size=size)) +
+  geom_line() +
+  scale_colour_manual(name="",
+                      labels=c("High k","High μ","Low μ, k","Regrowth"),
+                      values=c("red","blue","green","black")) +
+  scale_size(range=c(1, 3)) +
+  xlab("Stand age (yr)") +
+  ylab(expression(Aboveground~biomass~(Mg~C~ha^-1))) +
+  guides(size=FALSE) +
   theme_classic() +
   theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=16))
+        axis.title=element_text(size=16)) +
+  theme(legend.justification = c(1, 0), legend.position = c(1, 0),
+        legend.box.margin=margin(c(5,5,5,5)),
+        legend.text=element_text(size=12)) +
+  expand_limits(y=0) +
+  scale_y_continuous(breaks=seq(0,500,by=100))
 
 fig_1b
 
-fig_1b_labels <- tibble(
-  x = rep(max(monod_df_hierarchical$stand.age), 4),
-  y = c(max(monod_df_hierarchical$curve0),
-        max(monod_df_hierarchical$curve1)+10,
-        max(monod_df_hierarchical$curve2),
-        max(monod_df_hierarchical$curve3)),
-  labels = c("Original", "Low μ, k", "High μ", "High k"),
-  col = c("red", "green", "blue", "black")
-)
-fig_1b +
-  geom_text(data=fig_1b_labels, aes(x=x, y=y, label=labels, col=col),
-            hjust=0, nudge_x=10, size=(5/14)*12) +
-  scale_colour_manual(values=c("black","blue","green","red")) +
-  guides(col=FALSE) +
-  expand_limits(x=fig_1a_labels$x + 150, y=fig_1a_labels$y)
-
-ggsave('figs/fig1_b.png', width = 5, height = 3.2)
+ggsave('figs/fig1_b.png', width = 5, height = 4)
   
