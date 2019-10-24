@@ -46,6 +46,7 @@ fig_1a <-
   theme(legend.justification = c(1, 0), legend.position = c(1, 0),
         legend.box.margin=margin(c(5,5,5,5)), 
         legend.text=element_text(size=12)) +
+  expand_limits(y=535) +
   scale_y_continuous(breaks=seq(0,500,by=100))
 
 fig_1a
@@ -97,4 +98,11 @@ fig_1b <-
 fig_1b
 
 ggsave('figs/fig1_b.png', width = 5, height = 4)
+
+
+library(gridExtra)
+
+png("figs/fig1.png", width=10, height=4, units="in", res=300)
+grid.arrange(fig_1a, fig_1b, nrow=1)
+dev.off()
   
