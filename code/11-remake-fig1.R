@@ -45,13 +45,14 @@ fig_1a <-
         axis.title=element_text(size=16)) +
   theme(legend.justification = c(1, 0), legend.position = c(1, 0),
         legend.box.margin=margin(c(5,5,5,5)), 
-        legend.text=element_text(size=12)) +
+        legend.text=element_text(size=11)) +
   expand_limits(y=535) +
-  scale_y_continuous(breaks=seq(0,500,by=100))
+  scale_y_continuous(breaks=seq(0,500,by=100)) +
+  labs(tag="(a)")
 
 fig_1a
 
-ggsave('figs/fig1_a.png', width = 5, height = 4)
+ggsave('figs/fig1_a.png', width = 5, height = 4.1)
 
 
 # Figure 1b
@@ -80,7 +81,7 @@ fig_1b <-
   ggplot(monod_df_hierarchical_long, aes(x=stand.age, col=curve, y=agb, size=size)) +
   geom_line() +
   scale_colour_manual(name="",
-                      labels=c("High k","High μ","Low μ, k","Regrowth"),
+                      labels=c("Changed recovery rate","Changed mature state","Changed both","Regrowth"),
                       values=c("red","blue","green","black")) +
   scale_size(range=c(1, 3)) +
   xlab("Stand age (yr)") +
@@ -91,18 +92,20 @@ fig_1b <-
         axis.title=element_text(size=16)) +
   theme(legend.justification = c(1, 0), legend.position = c(1, 0),
         legend.box.margin=margin(c(5,5,5,5)),
-        legend.text=element_text(size=12)) +
+        legend.text=element_text(size=11)) +
   expand_limits(y=0) +
-  scale_y_continuous(breaks=seq(0,500,by=100))
+  scale_y_continuous(breaks=seq(0,500,by=100)) +
+  ylab("") +
+  labs(tag = "(b)")
 
 fig_1b
 
-ggsave('figs/fig1_b.png', width = 5, height = 4)
+ggsave('figs/fig1_b.png', width = 5, height = 4.1)
 
 
 library(gridExtra)
 
-png("figs/fig1.png", width=10, height=4, units="in", res=300)
+png("figs/fig1.png", width=10, height=4.1, units="in", res=300)
 grid.arrange(fig_1a, fig_1b, nrow=1)
 dev.off()
   
