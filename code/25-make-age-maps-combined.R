@@ -4,7 +4,7 @@
 library(raster)
 
 tag <-  "Mean"
-tag <-"Median"
+# tag <-"Median"
 
 if (tag == "Mean") {
   # get fractions of 4 PFT
@@ -144,7 +144,7 @@ plot.new()
 par(fig = c(0, 1, 9, 10) / 10)
 par(new=T)
 plot(-1:1, -1:1,  xaxt = 'n', yaxt = 'n', bty = 'n', pch = '', ylab = '', xlab = '')
-text(0,0, "a", font=2)
+text(0,0, "(a)", font=2)
 
 par(fig = c(0, 10, 5.75, 10) / 10)
 par(new=T)
@@ -185,7 +185,7 @@ mtext("Percentage of pixels", side = 4, line = 0.2, font = 2, cex = 0.4)
 par(fig = c(0, 1, 4, 5) / 10)
 par(new=T)
 plot(-1:1, -1:1,  xaxt = 'n', yaxt = 'n', bty = 'n', pch = '', ylab = '', xlab = '')
-text(0,0, "b", font=2)
+text(0,0, "(b)", font=2)
 
 par(fig = c(0, 10, 5.75, 10) / 10)
 par(new=T)
