@@ -178,7 +178,7 @@ axis(side = 1, at = c(0, 50, 100, 140, 150), labels = c("0", "50", "100", "140",
 axis(side = 1, at = c(150), labels = c("140+"), tck = -0.01, font = 2, cex.axis = 0.4, line = -1.3, lwd = 0)
 axis(side = 4, at = seq(0, 0.015, 0.005), labels = c("0%", "5%", "10%", "15%"), tck = -0.01, font = 2, cex.axis = 0.4, line = -1.3, lwd = 0)
 mtext("Forest age (yr)", side = 1, line = 0.2, font = 2, cex = 0.4)
-mtext("Percentage of pixels", side = 4, line = 0.2, font = 2, cex = 0.4)
+mtext("Percentage of sites", side = 4, line = 0.2, font = 2, cex = 0.4)
 
 
 # GFAD
@@ -219,6 +219,6 @@ axis(side = 1, at = c(0, 50, 100, 140, 150), labels = c("0", "50", "100", "140",
 axis(side = 1, at = c(150), labels = c("140+"), tck = -0.01, font = 2, cex.axis = 0.4, line = -1.3, lwd = 0)
 axis(side = 4, at = seq(0, 0.015, 0.005), labels = c("0%", "5%", "10%", "15%"), tck = -0.01, font = 2, cex.axis = 0.4, line = -1.3, lwd = 0)
 mtext("Forest age (yr)", side = 1, line = 0.2, font = 2, cex = 0.4)
-mtext("Percentage of sites", side = 4, line = 0.2, font = 2, cex = 0.4)
+mtext("Percentage of pixels", side = 4, line = 0.2, font = 2, cex = 0.4)
 
 dev.off()
