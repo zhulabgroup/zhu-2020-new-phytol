@@ -42,13 +42,14 @@ fig_1a <-
   guides(size=FALSE) +
   theme_classic() +
   theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=16)) +
+        axis.title=element_text(size=14)) +
   theme(legend.justification = c(1, 0), legend.position = c(1, 0),
         legend.box.margin=margin(c(5,5,5,5)), 
         legend.text=element_text(size=11)) +
   expand_limits(y=535) +
   scale_y_continuous(breaks=seq(0,500,by=100)) +
-  labs(tag="(a)")
+  labs(tag="(a)") + 
+  theme(plot.tag=element_text(size=16,face="bold"))
 
 fig_1a
 
@@ -89,14 +90,15 @@ fig_1b <-
   guides(size=FALSE) +
   theme_classic() +
   theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=16)) +
+        axis.title=element_text(size=14)) +
   theme(legend.justification = c(1, 0), legend.position = c(1, 0),
         legend.box.margin=margin(c(5,5,5,5)),
         legend.text=element_text(size=11)) +
   expand_limits(y=0) +
   scale_y_continuous(breaks=seq(0,500,by=100)) +
   ylab("") +
-  labs(tag = "(b)")
+  labs(tag = "(b)") + 
+  theme(plot.tag=element_text(size=16,face="bold"))
 
 fig_1b
 
