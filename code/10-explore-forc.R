@@ -22,7 +22,7 @@ forc_gg
 monod_mod <- nls(agb ~ SSmicmen(stand.age, mu, k), data = forc_df)
 coef(monod_mod)
 
-stand.age_vec = seq(
+stand.age_vec <- seq(
   from = 0, to = max(forc_df$stand.age),
   length.out = 500
 )
@@ -34,5 +34,5 @@ monod_df <- tibble(
 )
 
 forc_gg +
-  geom_line(data = monod_df, aes(stand.age, agb), col = 'red', lwd = 2)
-ggsave('docs/forc-monod.png', width = 10, height = 6.18)
+  geom_line(data = monod_df, aes(stand.age, agb), col = "red", lwd = 2)
+ggsave("docs/forc-monod.png", width = 10, height = 6.18)

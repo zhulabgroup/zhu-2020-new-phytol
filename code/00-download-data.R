@@ -30,12 +30,14 @@ download.file(
 )
 
 # ForC data
-temp <- paste0(tempdir(), '/ForC_simplified.csv')
+temp <- paste0(tempdir(), "/ForC_simplified.csv")
 download.file(
   "https://raw.githubusercontent.com/forc-db/ForC/master/ForC_simplified/ForC_simplified.csv",
   temp
 )
-zip(zipfile = 'data-raw/ForC_simplified.zip', 
-    files = temp,
-    flags = '-j9X') # j = junkpaths in unzip
+zip(
+  zipfile = "data-raw/ForC_simplified.zip",
+  files = temp,
+  flags = "-j9X"
+) # j = junkpaths in unzip
 unlink(temp)

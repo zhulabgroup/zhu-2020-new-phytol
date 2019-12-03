@@ -10,19 +10,19 @@ forc_df <- read_csv("data/ForC/ForC_simplified.csv") %>%
     !is.na(lon),
     !is.na(lat)
   ) %>%
-  mutate(stand.age.fewer=stand.age) %>% 
-  mutate(stand.age.fewer=ifelse(stand.age.fewer>140,150,stand.age.fewer)) %>% 
-  dplyr::select(lon,lat,stand.age.fewer)
+  mutate(stand.age.fewer = stand.age) %>%
+  mutate(stand.age.fewer = ifelse(stand.age.fewer > 140, 150, stand.age.fewer)) %>%
+  dplyr::select(lon, lat, stand.age.fewer)
 
 summary(forc_df)
 
 ## make spatial points data frame and raster
 library(sp)
 library(raster)
-coordinates(forc_df) = ~lon+lat
-crs(forc_df)<-"+proj=longlat"
+coordinates(forc_df) <- ~ lon + lat
+crs(forc_df) <- "+proj=longlat"
 
-forc_ras<-rasterize(forc_df,raster(),forc_df$stand.age.fewer)
+forc_ras <- rasterize(forc_df, raster(), forc_df$stand.age.fewer)
 
 ## Boundaries, coastline, and bounding box
 # reference: http://geog.uoregon.edu/bartlein/courses/geog490/week07-RMaps.html
@@ -45,31 +45,31 @@ ocean_poly <- readOGR(ocean_shapefile, layer = layer)
 
 ## reproject
 forc_proj <- spTransform(forc_df, CRS("+proj=robin"))
-forc_ras_proj<-projectRaster(forc_ras,crs = CRS("+proj=robin"), over = TRUE)
+forc_ras_proj <- projectRaster(forc_ras, crs = CRS("+proj=robin"), over = TRUE)
 coast_lines_proj <- spTransform(coast_lines, CRS("+proj=robin"))
 bb_poly_proj <- spTransform(bb_poly, CRS("+proj=robin"))
 ocean_poly_proj <- spTransform(ocean_poly, CRS("+proj=robin"))
 
 ## Color
 library(RColorBrewer)
-colfunc.forc <- colorRampPalette(c("#F6DDCC", "#B03A2E"),alpha=TRUE)
-colfunc.forc.transparent <- colorRampPalette(c("#F6DDCC80", "#B03A2E80"),alpha=TRUE)
+colfunc.forc <- colorRampPalette(c("#F6DDCC", "#B03A2E"), alpha = TRUE)
+colfunc.forc.transparent <- colorRampPalette(c("#F6DDCC80", "#B03A2E80"), alpha = TRUE)
 
 #### Plot
 # pdf("figs/age-map-robinson-overlay-forC.pdf")
 par(mar = c(2, 2, 2, 2))
 par(fig = c(0, 10, 0, 10) / 10)
 
-plot(forc_ras_proj, axes = FALSE, box = FALSE, alpha=0, legend = F)
-plot(ocean_poly_proj, col = "#1D334A", border = NA,add=T) # 1D334A
+plot(forc_ras_proj, axes = FALSE, box = FALSE, alpha = 0, legend = F)
+plot(ocean_poly_proj, col = "#1D334A", border = NA, add = T) # 1D334A
 plot(coast_lines_proj, col = "white", add = TRUE, lwd = 0.0001)
 plot(bb_poly_proj, bor = "black", add = TRUE)
-plot(forc_proj, axes = FALSE,  pch=19,cex=0.5,col = colfunc.forc.transparent(15),add=T)
+plot(forc_proj, axes = FALSE, pch = 19, cex = 0.5, col = colfunc.forc.transparent(15), add = T)
 plot(forc_ras_proj,
-     axes = FALSE, box = FALSE, col = colfunc.forc(15), zlim = c(0, 150), breaks = seq(0, 150, 10),
-     legend.only = TRUE, smallplot = c(0.82, 0.84, 0.5, 0.68),
-     axis.args = list(at = c(0, 30, 60, 90, 120, 140, 150), labels = c("0", "30", "60", "90", "120", "140", "140+"), font = 2, cex.axis = 0.6),
-     legend.args = list(text = "Forest age (yr)", side = 3, font = 2, line = 0.5, cex = 0.8)
+  axes = FALSE, box = FALSE, col = colfunc.forc(15), zlim = c(0, 150), breaks = seq(0, 150, 10),
+  legend.only = TRUE, smallplot = c(0.82, 0.84, 0.5, 0.68),
+  axis.args = list(at = c(0, 30, 60, 90, 120, 140, 150), labels = c("0", "30", "60", "90", "120", "140", "140+"), font = 2, cex.axis = 0.6),
+  legend.args = list(text = "Forest age (yr)", side = 3, font = 2, line = 0.5, cex = 0.8)
 )
 
 par(fig = c(5, 9.5, 2.2, 4.8) / 10)

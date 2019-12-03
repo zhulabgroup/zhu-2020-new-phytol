@@ -135,7 +135,7 @@ colfunc.gfad <- colorRampPalette(c("#F0E687", "#085025"))
 # # plot(grat30_lines_proj, col="lightblue", add=TRUE)
 # plot(bb_poly_proj, bor = "black", add = TRUE)
 # dev.off()
-# 
+#
 # pdf("figs/histogram-newfont.pdf", height = 4, width = 7)
 # hist(na.omit(values(age_veg)), nclass = 15, fre = FALSE, main = "", ylab = "Percentage of pixels", xlab = "Forest Age (Year)", col = colfunc.gfad(15), border = "white", xaxt = "n", yaxt = "n", font.lab = 2)
 # axis(side = 1, at = seq(0, 150, 30), labels = seq(0, 150, 30), font = 2)
@@ -153,10 +153,10 @@ plot(coast_lines_proj, col = "white", add = TRUE, lwd = 0.0001)
 # plot(grat30_lines_proj, col="lightblue", add=TRUE)
 plot(bb_poly_proj, bor = "black", add = TRUE)
 plot(age_veg_proj,
-     axes = FALSE, box = FALSE, col = colfunc.gfad(15), zlim = c(0, 150), breaks = seq(0, 150, 10),
-     legend.only = TRUE, smallplot = c(0.82, 0.84, 0.5, 0.68),
-     axis.args = list(at = c(0, 30, 60, 90, 120, 140, 150), labels = c("0", "30", "60", "90", "120", "140", "140+"), font = 2, cex.axis = 0.6),
-     legend.args = list(text = "Forest age (yr)", side = 3, font = 2, line = 0.5, cex = 0.8)
+  axes = FALSE, box = FALSE, col = colfunc.gfad(15), zlim = c(0, 150), breaks = seq(0, 150, 10),
+  legend.only = TRUE, smallplot = c(0.82, 0.84, 0.5, 0.68),
+  axis.args = list(at = c(0, 30, 60, 90, 120, 140, 150), labels = c("0", "30", "60", "90", "120", "140", "140+"), font = 2, cex.axis = 0.6),
+  legend.args = list(text = "Forest age (yr)", side = 3, font = 2, line = 0.5, cex = 0.8)
 )
 
 # par(fig=c(0.5,3,3,5.5)/10)
