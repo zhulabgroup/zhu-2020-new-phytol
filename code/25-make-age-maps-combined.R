@@ -3,8 +3,8 @@
 # library(ncdf4)
 library(raster)
 
-# tag <-  "Mean"
-tag <-"Median"
+tag <-  "Mean"
+# tag <-"Median"
 
 if (tag == "Mean") {
   # get fractions of 4 PFT
