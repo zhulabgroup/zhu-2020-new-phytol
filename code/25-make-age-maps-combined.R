@@ -3,8 +3,8 @@
 # library(ncdf4)
 library(raster)
 
-tag <-  "Mean"
-# tag <-"Median"
+# tag <-  "Mean"
+tag <-"Median"
 
 if (tag == "Mean") {
   # get fractions of 4 PFT
@@ -62,7 +62,7 @@ if (tag == "Mean") {
   
 } else if (tag == "Median") {
   # read median age
-  age_veg_df <- read.csv("./data/GFAD/Median forest age.csv")[, -1] # this file generated using 22-calc-median-age.R
+  age_veg_df <- read.csv("./data/GFAD/median-age.csv")[, -1] # this file generated using 22-calc-median-age.R
   
   # make raster
   age_veg <- rasterFromXYZ(age_veg_df[, c(1, 2, 18)], crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0")
