@@ -125,6 +125,6 @@ ggsave("figs/fig1_b.png", width = 5, height = 4.1)
 
 library(gridExtra)
 
-png("figs/fig1.png", width = 10, height = 4.1, units = "in", res = 300)
+pdf("figs/fig1.pdf", width = 10, height = 4.1)
 grid.arrange(fig_1a, fig_1b, nrow = 1)
 dev.off()
